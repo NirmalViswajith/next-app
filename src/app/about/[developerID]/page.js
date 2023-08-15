@@ -1,8 +1,5 @@
 'use client'
-import { useRouter } from "next/navigation";
-
-// Import useEffect and useState
-
+import { useParams } from "next/navigation";
 
 const details = [
   { id: 1, name: 'Yash', role: 'Senior Developer' },
@@ -10,10 +7,14 @@ const details = [
   { id: 3, name: 'Suresh', role: 'Frontend Developer' }
 ];
 
-export default function Developer({params}) {
-
+export default function Developer() {
+  const params = useParams();
   const developer = details.find((dev) => dev.id === parseInt(params.developerID));
-  console.log(developer);
+  if(!developer) {
+    return (
+      <h1>Developer not found</h1>
+    )
+  }
   return (
     <div>
       <h1>{developer.name}</h1>
